@@ -17,6 +17,7 @@ main {
 .section h2 {
     color: #2c7be5;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 /* ==================== HEADER ==================== */
@@ -51,6 +52,7 @@ nav a {
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 30px;
 }
 
 nav a:hover {
@@ -64,7 +66,6 @@ nav a:hover {
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
-    /* Responsivo */
 }
 
 .inicio-texto {
@@ -101,21 +102,6 @@ nav a:hover {
     }
 }
 
-/* ==================== TIPS Y ARTÍCULOS ==================== */
-.card {
-    background: white;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
 /* ==================== REGISTRO Y LOGIN ==================== */
 .acceso {
     display: flex;
@@ -123,7 +109,6 @@ nav a:hover {
     align-items: flex-start;
     gap: 30px;
     flex-wrap: wrap;
-    /* Responsivo */
     margin-top: 2rem;
 }
 
@@ -198,6 +183,96 @@ nav a:hover {
 
     .form-col {
         width: 100%;
+    }
+}
+
+/* ==================== TIPS Y ARTÍCULOS ==================== */
+.card {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+    color: #2c7be5;
+    margin-bottom: 0.5rem;
+}
+
+.card a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #089173;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+/* ==================== MULTIMEDIA ==================== */
+/* contenedor de la galería de videos */
+.media-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+/* caja responsiva para mantener relación 16:9 */
+.video-box {
+    position: relative;
+    width: 620px;
+    /* ancho base, se adapta por media queries */
+    padding-top: 56.25%;
+    /* 16:9 ratio */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background: #000;
+    /* fondo por si tarda el iframe en cargar */
+    transition: transform 0.25s ease;
+}
+
+.video-box:hover {
+    transform: translateY(-6px);
+}
+
+/* iframe ocupa todo el contenedor */
+.video-box iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* adaptabilidad: en pantallas pequeñas reduce ancho */
+@media (max-width: 900px) {
+    .video-box {
+        width: 45%;
+    }
+}
+
+@media (max-width: 520px) {
+    .video-box {
+        width: 100%;
+        padding-top: 56.25%;
     }
 }
 
