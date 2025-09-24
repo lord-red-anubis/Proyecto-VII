@@ -228,10 +228,55 @@ nav a:hover {
 /* contenedor de la galería de videos */
 .media-container {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
     flex-wrap: wrap;
-    margin-top: 1.5rem;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.video-box iframe {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== PERFIL ==================== */
+#perfil {
+    margin-top: 2rem;
+}
+
+#perfil h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #089173;
+}
+
+/* Ajustes de accesibilidad: mejor contraste */
+body {
+    background-color: #f8f9fa;
+    color: #111;
+    /* más oscuro para legibilidad */
+}
+
+button {
+    background-color: #2c7be5;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #1a5fc2;
+}
+
+/* Responsivo multimedia */
+@media (max-width: 768px) {
+    .media-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .video-box iframe {
+        width: 100%;
+        max-width: 400px;
+    }
 }
 
 /* caja responsiva para mantener relación 16:9 */
