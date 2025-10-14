@@ -7,6 +7,15 @@ navLinks.forEach(link => {
   });
 });
 
+// ==== MENÚ DESPLEGABLE EN MÓVILES ====
+const menuToggle = document.getElementById("menu-toggle");
+const nav = document.querySelector("nav");
+
+menuToggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+});
+
+
 // ==== TIPS DEL DÍA ====
 const tips = [
   "Bebe al menos 2 litros de agua al día.",
@@ -62,3 +71,19 @@ function nextSlide() {
 }
 
 setInterval(nextSlide, 4000);
+
+// ==== ANIMACIÓN DE ENTRADA PARA VIDEOS ====
+const videoCards = document.querySelectorAll(".video-card");
+
+function mostrarVideos() {
+  videoCards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if (cardTop < window.innerHeight - 100) {
+      card.style.opacity = "1";
+      card.style.transform = "translateY(0)";
+    }
+  });
+}
+
+window.addEventListener("scroll", mostrarVideos);
+window.addEventListener("load", mostrarVideos);
