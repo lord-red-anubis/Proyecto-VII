@@ -26,7 +26,8 @@
       <a href="#perfil">Perfil</a>
       <a href="#tips">Tips</a>
       <a href="#articulos">Artículos</a>
-      <a href="#progreso">Mi progreso</a>
+      <a href="#videos">Videos</a>
+      <a href="#explorar">Explorar más</a>
     </nav>
 
     <!-- Botón del menú móvil -->
@@ -90,14 +91,21 @@
     <!-- PERFIL -->
     <section id="perfil" class="section">
       <h2>Mi Perfil</h2>
-      <form class="marco-form" aria-label="Formulario de perfil">
+      <form id="perfilForm" class="marco-form">
         <label for="foto">Foto de perfil:</label>
         <input type="file" id="foto" name="foto" accept="image/*" />
+    
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" />
+    
         <label for="intereses">Intereses:</label>
         <input type="text" id="intereses" name="intereses" placeholder="Salud, ejercicio, alimentación..." />
-        <button type="submit">Guardar Perfil</button>
+    
+        <div class="perfil-botones">
+          <button type="submit">Guardar</button>
+          <button type="button" id="editarPerfil">Editar</button>
+          <button type="button" id="borrarPerfil">Borrar</button>
+        </div>
       </form>
     </section>
 
@@ -139,72 +147,83 @@
           antes de acostarte para mejorar la calidad del sueño.</div>
         <div class="card">👂 Escucha a tu cuerpo: Presta atención a las señales de fatiga, hambre o malestar y actúa en
           consecuencia.</div>
+        <div class="card">🌿 Conecta con la naturaleza: Pasea por parques o áreas verdes para reducir el estrés y revitalizarte.
+        </div>
+        <div class="card">📝 Practica gratitud diaria: Tómate unos minutos para agradecer lo bueno en tu vida y fortalecer tu
+          bienestar emocional.</div>
+        <div class="card">💤 Establece una rutina de sueño: Intenta acostarte y levantarte a la misma hora para mejorar la
+          calidad del descanso.</div>
       </div>
     </section>
 
-    <!-- ARTÍCULOS -->
+<!-- ARTÍCULOS -->
 <section id="articulos" class="section">
   <h2>Artículos de Expertos</h2>
   <div class="grid">
     <div class="card">
       <h3>Importancia del sueño</h3>
       <p>Descubre cómo dormir bien mejora tu salud física y mental.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="suenio">Leer más</a>
     </div>
     <div class="card">
       <h3>Nutrición balanceada</h3>
       <p>Consejos prácticos para mantener una dieta equilibrada.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="nutricion">Leer más</a>
     </div>
     <div class="card">
       <h3>Ejercicio y productividad</h3>
       <p>Cómo la actividad física impacta en tu rendimiento diario.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="ejercicio">Leer más</a>
     </div>
     <div class="card">
       <h3>Manejo del Estrés</h3>
       <p>Técnicas efectivas para reducir el estrés y mejorar tu bienestar emocional.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="estres">Leer más</a>
     </div>
     <div class="card">
       <h3>Hidratación y Salud</h3>
       <p>La importancia de mantenerse bien hidratado para optimizar funciones corporales.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="hidratacion">Leer más</a>
     </div>
     <div class="card">
       <h3>Salud Mental</h3>
       <p>Estrategias para fortalecer tu salud mental y afrontar los desafíos diarios.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="salud-mental">Leer más</a>
     </div>
     <div class="card">
       <h3>Hábitos de Vida Activos</h3>
       <p>Incorpora pequeñas actividades en tu rutina para mantenerte activo y saludable.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="habitos-vida">Leer más</a>
     </div>
     <div class="card">
       <h3>Prevención de Enfermedades</h3>
       <p>Medidas básicas para protegerte y prevenir enfermedades comunes.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="prevencion">Leer más</a>
     </div>
     <div class="card">
       <h3>Meditación y Relajación</h3>
       <p>Aprende técnicas de meditación para mejorar tu concentración y reducir el estrés.</p>
-      <a href="#">Leer más</a>
+      <a href="#" class="leer-mas" data-articulo="meditacion">Leer más</a>
+    </div>
+    <div class="card">
+      <h3>Ejercicios para mejorar la postura</h3>
+      <p>Consejos y rutinas para mantener una postura saludable y evitar molestias.</p>
+      <a href="#" class="leer-mas" data-articulo="postura">Leer más</a>
+    </div>
+    <div class="card">
+      <h3>Alimentación para la energía</h3>
+      <p>Recomendaciones alimenticias para mantenerte activo y con energía durante todo el día.</p>
+      <a href="#" class="leer-mas" data-articulo="energia">Leer más</a>
+    </div>
+    <div class="card">
+      <h3>Ejercicios de respiración</h3>
+      <p>Prácticas sencillas para mejorar tu respiración y reducir la ansiedad.</p>
+      <a href="#" class="leer-mas" data-articulo="respiracion">Leer más</a>
     </div>
   </div>
 </section>
 
-    <!-- NUEVA SECCIÓN: PROGRESO -->
-    <section id="progreso" class="section">
-      <h2>Mi Progreso</h2>
-      <p>Visualiza tu avance semanal hacia tus metas de bienestar.</p>
-      <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <button id="aumentarProgreso">Aumentar Progreso</button>
-    </section>
-  </main>
-
+<!-- VIDEOS -->
 <section id="videos" class="section videos">
   <h2>🎥 Videos Recomendados de Salud Integral</h2>
   <p>Explora videos sobre bienestar físico, nutrición y salud mental para complementar tu aprendizaje.</p>
@@ -212,8 +231,8 @@
   <div class="video-grid">
     <div class="video-card">
       <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/q12mV3CN0JU?si=aiuYhS3g3Fvm4-Bc" title="Ejercicios para principiantes" frameborder="0"
-          allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/q12mV3CN0JU?si=aiuYhS3g3Fvm4-Bc"
+          title="Ejercicios para principiantes" frameborder="0" allowfullscreen></iframe>
       </div>
       <h3>Rutina básica para principiantes</h3>
     </div>
@@ -228,10 +247,82 @@
 
     <div class="video-card">
       <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/tYwnSBkc_To?si=PgO-hoRfJoDraTzT" title="Meditación guiada" frameborder="0"
-          allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/tYwnSBkc_To?si=PgO-hoRfJoDraTzT" title="Meditación guiada"
+          frameborder="0" allowfullscreen></iframe>
       </div>
       <h3>Meditación guiada para reducir el estrés</h3>
+    </div>
+
+    <div class="video-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/1b1Eo4se11o?si=tmB3jsBS-uxIjZ9w" title="Ejercicios de estiramiento" frameborder="0"
+          allowfullscreen></iframe>
+      </div>
+      <h3>Ejercicios de estiramiento matutino</h3>
+    </div>
+
+    <div class="video-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/f6LoHbrzVq4?si=TpHpJ9rA_bdDK0ci" title="Recetas saludables" frameborder="0"
+          allowfullscreen></iframe>
+      </div>
+      <h3>Recetas fáciles y saludables</h3>
+    </div>
+
+    <div class="video-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/FU4OTllcOXM?si=kqXHw_WSY1FNtqdM" title="Yoga para principiantes" frameborder="0"
+          allowfullscreen></iframe>
+      </div>
+      <h3>Yoga para reducir el estrés</h3>
+    </div>
+
+    <div class="video-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/Unnvetjp0lk?si=5TfmMrxO-EweTQxS" title="Consejos para dormir mejor" frameborder="0"
+          allowfullscreen></iframe>
+      </div>
+      <h3>Tips para mejorar tu sueño</h3>
+    </div>
+
+    <div class="video-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/ksi-c8YgClY?si=QvConMd1B-t6wwto" title="Ejercicios de cardio" frameborder="0"
+          allowfullscreen></iframe>
+      </div>
+      <h3>Rutina de cardio en casa</h3>
+    </div>
+
+    <div class="video-card">
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/Hq0rXl9UI4A?si=RTUdrlgB7mybuTGR" title="Técnicas de relajación" frameborder="0"
+          allowfullscreen></iframe>
+      </div>
+      <h3>Técnicas de relajación para el día a día</h3>
+    </div>
+  </div>
+</section>
+
+
+<!--EXPLORAR MÁS-->
+<section id="explorar" class="section explorar">
+  <h2>Explora Más Recursos</h2>
+  <p>Encuentra herramientas y artículos adicionales sobre salud integral.</p>
+  <div class="explorar-grid">
+    <div class="card">
+      <h3>Guías de Alimentación</h3>
+      <p>Descubre menús saludables y equilibrados para tu día a día.</p>
+      <a href="https://www.gob.mx/salud/prensa/244-guias-alimentarias-herramienta-para-mejorar-nutricion-de-la-poblacion-mexicana?idiom=es" class="btn">Ver Guías</a>
+    </div>
+    <div class="card">
+      <h3>Ejercicios en Casa</h3>
+      <p>Rutinas simples para mantenerte activo sin salir de casa.</p>
+      <a href="https://unibooking.es/content/14-ejercicios-que-puedes-hacer-sin-salir-de-casa?msclkid=dc13a71d67e31dc4515ccfea7d054faf" class="btn">Ver Ejercicios</a>
+    </div>
+    <div class="card">
+      <h3>Bienestar Emocional</h3>
+      <p>Recursos y prácticas para fortalecer tu salud mental y emocional.</p>
+      <a href="https://albamarpsicologia.com/bienestar-emocional-como-mejorarlo/" class="btn">Ver Recursos</a>
     </div>
   </div>
 </section>
