@@ -16,86 +16,130 @@ if (menuToggle && nav) {
   });
 }
 
-// ==== TIPS DEL DÍA ====
-const tips = [
-  "Bebe al menos 2 litros de agua al día.",
-  "Realiza estiramientos cada mañana.",
-  "Evita el exceso de cafeína.",
-  "Tómate 10 minutos diarios para meditar.",
-  "Agradece algo cada día."
-];
-function mostrarTipAleatorio() {
-  const tip = tips[Math.floor(Math.random() * tips.length)];
-  const contenedor = document.getElementById("tips-grid");
-  if (contenedor) contenedor.innerHTML = `<div class="card">🌟 ${tip}</div>`;
-}
-window.onload = mostrarTipAleatorio;
-
-// ==== PERFIL LOCALSTORAGE (GUARDAR, EDITAR, BORRAR) ====
-const formPerfil = document.querySelector("#perfil form");
-const editarBtn = document.getElementById("editarPerfil");
-const borrarBtn = document.getElementById("borrarPerfil");
-
-function cargarPerfil() {
-  const perfil = JSON.parse(localStorage.getItem("perfil"));
-  if (perfil) {
-    document.getElementById("nombre").value = perfil.nombre || "";
-    document.getElementById("intereses").value = perfil.intereses || "";
+// ==== SALUDO PERSONALIZADO Y SESIÓN ====
+const userGreeting = document.getElementById("user-greeting");
+function mostrarSaludo() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user && user.name) {
+    userGreeting.textContent = `👋 Hola, ${user.name}`;
+  } else {
+    userGreeting.textContent = "";
   }
 }
 
-if (formPerfil) {
-  formPerfil.addEventListener("submit", e => {
-    e.preventDefault();
-    const nombre = document.getElementById("nombre").value;
-    const intereses = document.getElementById("intereses").value;
-    localStorage.setItem("perfil", JSON.stringify({ nombre, intereses }));
-    alert("✅ Perfil guardado con éxito");
-  });
-}
-
-if (editarBtn) {
-  editarBtn.addEventListener("click", () => {
-    alert("✏️ Ahora puedes editar tus datos y volver a guardarlos.");
-    document.getElementById("nombre").focus();
-  });
-}
-
-if (borrarBtn) {
-  borrarBtn.addEventListener("click", () => {
-    localStorage.removeItem("perfil");
-    formPerfil.reset();
-    alert("🗑️ Perfil eliminado.");
-  });
-}
-
-window.addEventListener("load", cargarPerfil);
-
-// ==== VALIDACIÓN DE FORMULARIOS ====
+// ==== REGISTRO ====
 const regForm = document.getElementById("registerForm");
-const logForm = document.getElementById("loginForm");
-
 if (regForm) {
   regForm.addEventListener("submit", e => {
     e.preventDefault();
-    alert("Registro exitoso ✅ Bienvenido a Salud Integral");
+    const name = document.getElementById("nombreRegistro").value.trim();
+    const email = document.getElementById("emailRegistro").value.trim();
+    const password = document.getElementById("passRegistro").value.trim();
+
+    if (!name || !email.includes("@") || password.length < 6) {
+      alert("⚠️ Verifica tus datos. La contraseña debe tener al menos 6 caracteres.");
+      return;
+    }
+
+    const user = { name, email, password, intereses: "", foto: "" };
+    localStorage.setItem("user", JSON.stringify(user));
+    alert(`✅ Registro exitoso. ¡Bienvenido, ${name}!`);
+    mostrarSaludo();
   });
 }
 
+// ==== LOGIN ====
+const logForm = document.getElementById("loginForm");
 if (logForm) {
   logForm.addEventListener("submit", e => {
     e.preventDefault();
-    alert("Inicio de sesión correcto 🔑");
+    const email = document.getElementById("emailLogin").value.trim();
+    const password = document.getElementById("passLogin").value.trim();
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user.email === email && user.password === password) {
+      alert(`🔓 Bienvenido de nuevo, ${user.name}`);
+      mostrarSaludo();
+    } else {
+      alert("❌ Credenciales incorrectas o usuario no registrado.");
+    }
   });
 }
 
-// ==== CORRECCIÓN: “LEER MÁS” EN ARTÍCULOS ====
+// ==== PERFIL ====
+const perfilForm = document.getElementById("perfilForm");
+const editarPerfilBtn = document.getElementById("editarPerfil");
+const borrarPerfilBtn = document.getElementById("borrarPerfil");
+const fotoInput = document.getElementById("foto");
+
+function cargarPerfil() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user) {
+    document.getElementById("nombre").value = user.name || "";
+    document.getElementById("intereses").value = user.intereses || "";
+  }
+}
+
+if (perfilForm) {
+  perfilForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("nombre").value.trim();
+    const intereses = document.getElementById("intereses").value.trim();
+    let user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+      alert("⚠️ Debes iniciar sesión o registrarte primero.");
+      return;
+    }
+
+    user.name = name || user.name;
+    user.intereses = intereses;
+    localStorage.setItem("user", JSON.stringify(user));
+    alert("✅ Perfil actualizado correctamente.");
+    mostrarSaludo();
+  });
+}
+
+if (editarPerfilBtn) {
+  editarPerfilBtn.addEventListener("click", () => {
+    perfilForm.querySelectorAll("input, textarea").forEach(el => el.disabled = false);
+    alert("✏️ Modo edición activado. Puedes cambiar tus datos.");
+  });
+}
+
+if (borrarPerfilBtn) {
+  borrarPerfilBtn.addEventListener("click", () => {
+    localStorage.removeItem("user");
+    perfilForm.reset();
+    userGreeting.textContent = "";
+    alert("🗑️ Perfil eliminado correctamente.");
+  });
+}
+
+// ==== FOTO DE PERFIL ====
+if (fotoInput) {
+  fotoInput.addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = event => {
+        const user = JSON.parse(localStorage.getItem("user")) || {};
+        user.foto = event.target.result;
+        localStorage.setItem("user", JSON.stringify(user));
+      };
+      reader.readAsDataURL(file);
+      alert("🖼️ Foto de perfil actualizada.");
+    }
+  });
+}
+
+// ==== LEER MÁS EN ARTÍCULOS (ABRE EN NUEVA PESTAÑA) ====
 const botonesLeerMas = document.querySelectorAll(".leer-mas");
 botonesLeerMas.forEach(boton => {
   boton.addEventListener("click", e => {
     e.preventDefault();
-    const articulo = boton.dataset.articulo;
-    alert(`📖 Abriendo el artículo completo sobre ${articulo}.`);
+    const link = boton.dataset.link;
+    if (link) window.open(link, "_blank");
   });
 });
 
@@ -103,8 +147,10 @@ botonesLeerMas.forEach(boton => {
 let index = 0;
 const images = document.querySelectorAll('.carousel img');
 function nextSlide() {
-  index = (index + 1) % images.length;
-  document.querySelector('.carousel').style.transform = `translateX(-${index * 100}%)`;
+  if (images.length > 0) {
+    index = (index + 1) % images.length;
+    document.querySelector('.carousel').style.transform = `translateX(-${index * 100}%)`;
+  }
 }
 setInterval(nextSlide, 4000);
 
@@ -120,5 +166,40 @@ function mostrarVideos() {
   });
 }
 window.addEventListener("scroll", mostrarVideos);
-window.addEventListener("load", mostrarVideos);
+window.addEventListener("load", () => {
+  mostrarVideos();
+  cargarPerfil();
+  mostrarSaludo();
+});
+
+// ==== CERRAR SESIÓN ====
+const logoutBtn = document.getElementById("logoutBtn");
+
+function actualizarLogoutBtn() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (user && user.name) {
+    logoutBtn.style.display = "inline-block";
+  } else {
+    logoutBtn.style.display = "none";
+  }
+}
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    if (confirm("¿Deseas cerrar tu sesión?")) {
+      localStorage.removeItem("user");
+      document.getElementById("perfilForm")?.reset();
+      document.getElementById("user-greeting").textContent = "";
+      logoutBtn.style.display = "none";
+      alert("👋 Sesión cerrada correctamente.");
+    }
+  });
+}
+
+window.addEventListener("load", () => {
+  mostrarSaludo();
+  cargarPerfil();
+  actualizarLogoutBtn();
+});
+
 
